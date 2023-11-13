@@ -2,43 +2,89 @@
 import Button from "@/components/Button";
 import Input from "@/components/input";
 import { Formik, Form } from "formik";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import * as Yup from "yup";
 
 export default function Register() {
+  const [error, setError] = useState("");
+  const [isFormSubmitting, setFormSubmitting] = useState(false);
+
+  const router = useRouter();
   const initialValues = {
+    name: "",
     email: "",
     senha: "",
   };
-  
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Campo obrigatório"),
     email: Yup.string().email("Email inválido").required("Campo obrigatório"),
     senha: Yup.string().required("Campo obrigatório"),
   });
 
-  async function handleSubmit(values) {
+  async function handleSubmit(values, { resetForm }) {
+    setFormSubmitting(true);
+    try {
+      await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          senha: values.senha,
+        }),
+      }).then(async (res) => {
+        const result = await res.json();
 
+        if (result.status === 201) {
+          alert(result.message);
+          router.push("/login");
+        } else {
+          renderError(result.message);
+          resetForm();
+        }
+        setFormSubmitting(false);
+      });
+    } catch (error) {
+      setFormSubmitting(false);
+      renderError("Erro ao criar conta, tente mais tarde!");
+    }
   }
-  
+
+  function renderError(msg) {
+    setError(msg);
+    setTimeout(() => {
+      setError("");
+    }, 3000);
+  }
+
   return (
     <main className="min-h-screen flex items-center justify-center">
-      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
         {({ values }) => (
-          <Form noValidate className="flex flex-col gap-2 p-4 border border-zinc-300 min-w-[300px] bg-white">
-            <Input name="nome" type="name" required />
+          <Form
+            noValidate
+            className="flex flex-col gap-2 p-4 border border-zinc-300 min-w-[300px] bg-white"
+          >
+            <Input name="name" type="name" required />
             <Input name="email" type="email" required />
-            <Input
-              name="senha"
-              type="password"
-              required
-              autoComplete="off"
-            />
+            <Input name="senha" type="password" required autoComplete="off" />
             <Button
               type="submit"
-              text="Registrar"
+              text={isFormSubmitting ? "Carregando..." : "Cadastrar"}
+              disabled={isFormSubmitting}
               className="bg-blue-700 text-white rounded p-2 cursor-pointer"
             />
+            {!values.name && !values.email && !values.senha && error && (
+              <p className="text-red-500 text-sm text-center">{error}</p>
+            )}
           </Form>
         )}
       </Formik>
