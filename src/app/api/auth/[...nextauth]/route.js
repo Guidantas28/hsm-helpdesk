@@ -6,7 +6,7 @@ import connect from "@/utils/db";
 
 const options = NextAuth ({
     providers: [CredentialsProvider({
-        id: "credentials",
+        id: "Credentials",
         name: "Credentials",
         async authorize(credentials) {
             await connect();
@@ -27,7 +27,7 @@ const options = NextAuth ({
                 throw new Error("Email não cadastrado");
             }
             } catch{
-
+                throw new Error("Erro ao autenticar usuário");
             }
         }
     })],
@@ -36,5 +36,5 @@ const options = NextAuth ({
     }
 })
 
-export {options as GET, options as POST}
+export {options as GET, options as POST};
 

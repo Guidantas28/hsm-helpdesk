@@ -3,14 +3,26 @@ import Button from "@/components/Button";
 import Input from "@/components/input";
 import { Formik, Form } from "formik";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 
 export default function Register() {
   const [error, setError] = useState("");
   const [isFormSubmitting, setFormSubmitting] = useState(false);
-
   const router = useRouter();
+  const { status } = useSession();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  }, [status, router]);
+
+  if(status !== "unauthenticated") {
+    return null
+  }
+
   const initialValues = {
     name: "",
     email: "",
