@@ -71,8 +71,9 @@ export default function Register() {
         {({ values }) => (
           <Form
             noValidate
-            className="flex flex-col gap-2 p-4 border border-zinc-300 min-w-[300px] bg-white"
+            className="flex flex-col gap-2 p-4 border border-zinc-300 min-w-[300px] bg-black bg-opacity-10 rounded-md"
           >
+            <h2 className="font-semibold text-lg">Cadastro</h2>
             <Input name="name" type="name" required />
             <Input name="email" type="email" required />
             <Input name="senha" type="password" required autoComplete="off" />
@@ -80,7 +81,7 @@ export default function Register() {
               type="submit"
               text={isFormSubmitting ? "Carregando..." : "Cadastrar"}
               disabled={isFormSubmitting}
-              className="bg-blue-700 text-white rounded p-2 cursor-pointer"
+              className="bg-transparent cursor-pointer hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
             />
             {!values.name && !values.email && !values.senha && error && (
               <p className="text-red-500 text-sm text-center">{error}</p>
