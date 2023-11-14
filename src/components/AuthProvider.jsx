@@ -4,7 +4,7 @@ import { SessionProvider } from "next-auth/react"
 
 export default function AuthProvider({ children }) {
     return (
-        <SessionProvider session={pageProps.session}>
+        <SessionProvider>
         {children}
         </SessionProvider>
     )
