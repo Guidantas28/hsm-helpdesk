@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <div className="flex gap-4 justify-center p-2 flex-wrap">
       <Link href="/">Home</Link>
-      <Link href="/dashboard">Dashboard</Link>
+      <Link href="/criarChamado">Dashboard</Link>
       <span className="bg-zinc-300 rounded-sm px-2">{`Olá ${
         session?.user?.name.split(" ")[0]
       }`}</span>
