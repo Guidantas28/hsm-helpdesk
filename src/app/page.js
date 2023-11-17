@@ -1,10 +1,11 @@
 import LayoutAdmin from '@/components/LayoutAdmin'
+import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Home() {
   return (
    <LayoutAdmin>
-      <h2>Chamados</h2>
+     <Link href="/criarChamado">Chamados</Link>
    </LayoutAdmin>
   )
 }

@@ -9,6 +9,8 @@ const ChamadoSchema = new mongoose.Schema({
     usuario: {type: mongoose.Schema.Types.ObjectId, ref: 'name', required: true},
 });
 
-const Chamado = mongoose.model('Chamado', ChamadoSchema);
+
+
+const Chamado = mongoose.models.Chamado || mongoose.model("Chamado", ChamadoSchema);
 
 export default Chamado;

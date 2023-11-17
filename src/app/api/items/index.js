@@ -1,6 +1,5 @@
-// pages/api/items/index.js
-import { connect } from '../../../db';
-import Item from '../../../models/Item';
+import Chamado from '@/models/Chamado';
+import connect from '@/utils/db';
 
 connect();
 
@@ -8,8 +7,8 @@ export default async function handler(req, res) {
   switch (req.method) {
     case 'GET':
       try {
-        const items = await Item.find({});
-        res.status(200).json(items);
+        const chamado = await Chamado.find({});
+        res.status(200).json(chamado);
       } catch (error) {
         res.status(500).json({ error: 'Erro ao buscar itens.' });
       }
@@ -17,8 +16,8 @@ export default async function handler(req, res) {
 
     case 'POST':
       try {
-        const { name, description } = req.body;
-        const newItem = new Item({ name, description });
+        const { titulo, descricao, status, dataAbertura, dataFechamento, usuario } = req.body;
+        const newItem = new Chamado({ titulo, descricao, status, dataAbertura, dataFechamento, usuario });
         const savedItem = await newItem.save();
         res.status(201).json(savedItem);
       } catch (error) {
