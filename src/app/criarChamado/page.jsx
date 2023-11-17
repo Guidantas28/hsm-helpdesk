@@ -10,10 +10,10 @@ const NovoChamado = () => {
   const [dataFechamento, setDataFechamento] = useState("");
   const [usuario, setUsuario] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, value) => {
     e.preventDefault();
 
-    const response = await fetch("/api/items", {
+    const response = await fetch("/api/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const NovoChamado = () => {
       console.log("Chamado criado com sucesso!");
     } else {
       console.error("Erro ao criar chamado.");
-      console.log(response)
+      console.log(response);
     }
   };
 
@@ -44,8 +44,9 @@ const NovoChamado = () => {
           <label className="block mb-4 bg-gray-800">
             Título:
             <input
+              name="titulo"
               type="text"
-              value={titulo}
+              value={titulo || ''}
               onChange={(e) => setTitulo(e.target.value)}
               className="block w-full mt-1 p-2 rounded bg-gray-700"
             />
@@ -53,6 +54,7 @@ const NovoChamado = () => {
           <label className="block mb-4 bg-gray-800">
             Descrição:
             <textarea
+              name="descricao"
               value={descricao}
               onChange={(e) => setDescricao(e.target.value)}
               className="block w-full mt-1 p-2 rounded bg-gray-700"
@@ -66,16 +68,17 @@ const NovoChamado = () => {
               className="block w-full mt-1 p-2 rounded bg-gray-700"
               name="status"
             >
-              <option value="aberto" defaultValue="aberto">
+              <option value="aberto">
                 Aberto
               </option>
-              <option value="aberto">Em andamento</option>
-              <option value="aberto">Fechado</option>
+              <option value="emAndamento">Em andamento</option>
+              <option value="fechado">Fechado</option>
             </select>
           </label>
           <label className="block mb-4 bg-gray-800">
             Data Abertura:
             <input
+              name="dateAbertura"
               type="date"
               value={dataAbertura}
               onChange={(e) => setDataAbertura(e.target.value)}
@@ -85,7 +88,6 @@ const NovoChamado = () => {
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onSubmit={handleSubmit}
           >
             Criar Chamado
           </button>
