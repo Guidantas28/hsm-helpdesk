@@ -6,8 +6,7 @@ const ChamadoSchema = new Schema({
     titulo: {type: String, required: true},
     descricao: {type: String, required: true},
     status: {type: String, required: true},	
-    dataAbertura: {type: Date, default: Date.now},
-    dataFechamento: {type: Date},
+    dataAbertura: {type: String, required: true},
     usuario: {type: Schema.Types.ObjectId, ref: 'name'},
 });
 

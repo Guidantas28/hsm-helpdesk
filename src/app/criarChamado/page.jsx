@@ -22,9 +22,7 @@ const NovoChamado = () => {
         titulo,
         descricao,
         status,
-        dataAbertura,
-        dataFechamento,
-        usuario,
+        dataAbertura
       }),
     });
 
