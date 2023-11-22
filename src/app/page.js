@@ -6,7 +6,6 @@ import Dashboard from '@/components/Dashboard'
 export default function Home({chamados}) {
   return (
    <LayoutAdmin>
-     <Link href="/criarChamado">Chamados</Link>
      <Dashboard />
    </LayoutAdmin>
   )

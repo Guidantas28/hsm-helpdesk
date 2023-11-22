@@ -1,14 +1,20 @@
 "use client";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import * as Yup from "yup";
 
-const NovoChamado = () => {
+
+
+export default function NovoChamado () {
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
   const [status, setStatus] = useState("");
   const [dataAbertura, setDataAbertura] = useState("");
   const [dataFechamento, setDataFechamento] = useState("");
   const [usuario, setUsuario] = useState("");
+
+  const router = useRouter();
 
   const handleSubmit = async (e, value) => {
     e.preventDefault();
@@ -28,6 +34,7 @@ const NovoChamado = () => {
 
     if (response.ok) {
       console.log("Chamado criado com sucesso!");
+      router.push("/");
     } else {
       console.error("Erro ao criar chamado.");
       console.log(response);
@@ -66,6 +73,7 @@ const NovoChamado = () => {
               className="block w-full mt-1 p-2 rounded bg-gray-700"
               name="status"
             >
+              <option value="">Selecione</option>  
               <option value="aberto">
                 Aberto
               </option>
@@ -89,10 +97,11 @@ const NovoChamado = () => {
           >
             Criar Chamado
           </button>
+          
         </form>
       </div>
     </div>
   );
 };
 
-export default NovoChamado;
+

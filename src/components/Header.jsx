@@ -13,10 +13,12 @@ export default function Header() {
   }
 
   return (
+    <div>
     <div className="flex gap-4 justify-center p-2 flex-wrap">
       <Link href="/">Home</Link>
-      <Link href="/criarChamado">Dashboard</Link>
-      <span className="bg-zinc-300 rounded-sm px-2">{`Olá ${
+      <Link href="/criarChamado">Criar Chamado</Link>
+      <div className='flex gap-2'>
+       <span className="px-2 font-bold">{`Olá ${
         session?.user?.name.split(" ")[0]
       }`}</span>
       <Button
@@ -24,6 +26,9 @@ export default function Header() {
         className="bg-red-600 text-white rounded px-2 cursor-pointer"
         onClick={() => signOut()}
       />
+      </div>
+    </div>
+    
     </div>
   );
 }

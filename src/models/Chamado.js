@@ -7,7 +7,6 @@ const ChamadoSchema = new Schema({
     descricao: {type: String, required: true},
     status: {type: String, required: true},	
     dataAbertura: {type: String, required: true},
-    usuario: {type: Schema.Types.ObjectId, ref: 'name'},
 });
 
 
