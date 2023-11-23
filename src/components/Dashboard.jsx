@@ -13,29 +13,34 @@ export default function Dashboard() {
             "Content-Type": "application/json",
           },
         });
-  
+
         if (!response.ok) {
           throw new Error(`Erro na solicitação: ${response.statusText}`);
         }
-  
+
         const data = await response.json();
-        console.log(data);
+        setChamados(data);
       } catch (error) {
         console.error("Erro ao buscar dados:", error.message);
       }
-      fetchData();
-      console.log(data)
     };
-  }, [])
+    fetchData();
+  }, []);
 
   return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {chamados.map((chamado) => (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {Array.isArray(chamados) ? (
+        chamados.map((chamado) => (
           <div key={chamado._id} className="border p-4 ">
-            <p>{chamado.titulo}</p>
+            <h1>{chamado.titulo}</h1>
+            <span>{chamado.status}</span>
             <p>{chamado.descricao}</p>
+            <p>{chamado.dataAbertura}</p>
           </div>
-        ))}
-      </div>
+        ))
+      ) : (
+        <p>Carregando...</p>
+      )}
+    </div>
   );
 }
