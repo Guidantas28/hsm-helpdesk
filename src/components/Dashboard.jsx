@@ -45,3 +45,25 @@ export default function Dashboard() {
     </div>
   );
 }
+
+export async function getServerSideProps() {
+  try {
+    await connect();
+
+    const chamados = await Chamado.find();
+
+    return {
+      props: {
+        chamados,
+      },
+    };
+  } catch (error) {
+    console.error('Erro ao buscar dados do MongoDB:', error);
+
+    return {
+      props: {
+        chamados: [],
+      },
+    };
+  }
+}

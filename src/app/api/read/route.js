@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET(req, res) {
     try {
-        await connect();
+        connect();
 
         const chamados = await Chamado.find();
         
