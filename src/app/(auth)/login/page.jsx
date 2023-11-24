@@ -67,14 +67,14 @@ export default function Login() {
         {({ values }) => (
           <Form
             noValidate
-            className="flex flex-col gap-2 p-4 border border-zinc-300 min-w-[300px] bg-black rounded-md"
+            className="flex flex-col gap-2 p-4 border border-zinc-300 min-w-[300px] rounded-md"
           >
-            <Input name="email" type="email" required />
+            <Input name="email" type="email" required className="" />
             <Input name="senha" type="password" required autoComplete="off" />
             <Button
               type="submit"
               text={isFormSubmitting ? "Entrando..." : "Entrar"}
-              className="bbg-transparent cursor-pointer hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+              className="bg-transparent cursor-pointer hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
             />{!values.email && !values.senha && error && (
               <p className="text-red-500 text-sm text-center">{error}</p>
             )}
