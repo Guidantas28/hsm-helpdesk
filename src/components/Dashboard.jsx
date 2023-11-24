@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-export default function Dashboard() {
+export default function Dashboard({ chamadosDB }) {
   const [chamados, setChamados] = useState([]);
 
   useEffect(() => {
@@ -50,11 +50,11 @@ export async function getServerSideProps() {
   try {
     await connect();
 
-    const chamados = await Chamado.find();
+    const chamadosDB = await Chamado.find();
 
     return {
       props: {
-        chamados,
+        chamadosDB,
       },
     };
   } catch (error) {
@@ -62,7 +62,7 @@ export async function getServerSideProps() {
 
     return {
       props: {
-        chamados: [],
+        chamadosDB: [],
       },
     };
   }
