@@ -2,7 +2,6 @@ import Chamado from '@/models/Chamado';
 import { NextResponse } from "next/server";
 import connect from '@/utils/db';
 
-connect();
 
 export async function POST(req) {   
   try {
