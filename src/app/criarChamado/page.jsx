@@ -3,16 +3,16 @@ import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
+import LayoutAdmin from "@/components/LayoutAdmin";
 
-
-
-export default function NovoChamado () {
+export default function NovoChamado() {
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
   const [status, setStatus] = useState("");
   const [dataAbertura, setDataAbertura] = useState("");
   const [dataFechamento, setDataFechamento] = useState("");
   const [usuario, setUsuario] = useState("");
+  
 
   const router = useRouter();
 
@@ -28,7 +28,7 @@ export default function NovoChamado () {
         titulo,
         descricao,
         status,
-        dataAbertura
+        dataAbertura,
       }),
     });
 
@@ -42,7 +42,8 @@ export default function NovoChamado () {
   };
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+    <LayoutAdmin>
+      <div className="bg-gray-900 text-white min-h-screen flex items-center justify-center">
       <div className="bg-gray-800 p-8 rounded shadow-md w-full sm:w-96">
         <h1 className="text-2xl font-bold mb-6 bg-gray-800">Novo Chamado</h1>
         <form onSubmit={handleSubmit} className="bg-gray-800">
@@ -51,7 +52,7 @@ export default function NovoChamado () {
             <input
               name="titulo"
               type="text"
-              value={titulo || ''}
+              value={titulo || ""}
               onChange={(e) => setTitulo(e.target.value)}
               className="block w-full mt-1 p-2 rounded bg-gray-700"
             />
@@ -73,10 +74,8 @@ export default function NovoChamado () {
               className="block w-full mt-1 p-2 rounded bg-gray-700"
               name="status"
             >
-              <option value="">Selecione</option>  
-              <option value="aberto">
-                Aberto
-              </option>
+              <option value="">Selecione</option>
+              <option value="aberto">Aberto</option>
               <option value="emAndamento">Em andamento</option>
               <option value="fechado">Fechado</option>
             </select>
@@ -97,11 +96,9 @@ export default function NovoChamado () {
           >
             Criar Chamado
           </button>
-          
         </form>
       </div>
     </div>
+    </LayoutAdmin>
   );
-};
-
-
+}
