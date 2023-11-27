@@ -34,7 +34,7 @@ export default function NovoChamado() {
 
     if (response.ok) {
       console.log("Chamado criado com sucesso!");
-      router.push("/");
+      router.push("/dashboard");
     } else {
       console.error("Erro ao criar chamado.");
       console.log(response);
