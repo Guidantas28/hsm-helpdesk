@@ -15,13 +15,10 @@ export default function Login() {
 
   useEffect(() => {
     if (status === "authenticated") {
-      router.push("/");
+      router.push("/dashboard");
     }
   }, [status, router]);
 
-  if(status !== "unauthenticated") {
-    return null
-  }
 
   const initialValues = {
     email: "",
@@ -39,7 +36,7 @@ export default function Login() {
       signIn("Credentials", { ...values, redirect: false }).then(
         ({ error }) => {
           if (!error) {
-            router.push("/");
+            router.push("/login");
           } else {
             setError(error.replace("Error: ", ""));
             setTimeout(() => {
