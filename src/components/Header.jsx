@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <div>
         <div className="flex gap-4 justify-center p-2 flex-wrap">
-        <Link href="/">Home</Link>
+        <Link href="/dashboard">Home</Link>
         <Link href="/criarChamado">Criar Chamado</Link>
         <div className='flex gap-2'>
          <span className="px-2 font-bold">{`Olá ${
