@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { MdDelete } from "react-icons/md";
 
 export default function DeleteChamadoButton ({ chamadoId, onDeleteSuccess, onDeleteError }) {
