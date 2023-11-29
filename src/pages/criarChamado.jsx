@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LayoutAdmin from "@/components/LayoutAdmin";
 import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 export default function NovoChamado({ initialDateTime }) {
   const [titulo, setTitulo] = useState("");
@@ -108,7 +109,7 @@ export default function NovoChamado({ initialDateTime }) {
 }
 
 export async function getStaticProps(){
-  const initialDateTime = format(new Date(), "dd/MM/yyyy HH:mm");
+  const initialDateTime = format(new Date(), "dd/MM/yyyy HH:mm", { locale: ptBR, timeZone: 'America/Sao_Paulo' });
 
   return {
     props: {
