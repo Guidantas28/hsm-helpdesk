@@ -109,8 +109,9 @@ export default function NovoChamado({ initialDateTime }) {
 }
 
 export async function getServerSideProps(){
-  const initialDateTime = format(new Date(), "dd/MM/yyyy HH:mm", { locale: ptBR, timeZone: 'America/Sao_Paulo' });
-
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'America/Sao_Paulo' };
+  const initialDateTime = new Date().toLocaleString('pt-BR', options);
+  
   return {
     props: {
       initialDateTime,
